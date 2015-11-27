@@ -1,4 +1,4 @@
-package tp.pr1.logica;
+package tp.pr2.logica;
 
 public class CelulaCompleja extends Celula {
 	public final int MAX_COMER = 3;

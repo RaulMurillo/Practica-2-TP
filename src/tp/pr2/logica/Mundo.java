@@ -1,4 +1,4 @@
-package tp.pr1.logica;
+package tp.pr2.logica;
 
 /**
  * Esta clase contiene a la superficie.

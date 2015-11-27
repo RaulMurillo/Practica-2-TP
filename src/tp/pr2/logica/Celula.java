@@ -1,4 +1,4 @@
-package tp.pr1.logica;
+package tp.pr2.logica;
 
 /**
  * Es una clase abstracta de la que heredan las clases concretas celula compleja y celula simple

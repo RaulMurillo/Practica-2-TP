@@ -1,6 +1,6 @@
-package tp.pr1.main;
-import tp.pr1.control.*;
-import tp.pr1.logica.*;
+package tp.pr2.main;
+import tp.pr2.control.*;
+import tp.pr2.logica.*;
 
 import java.util.Scanner;
 
