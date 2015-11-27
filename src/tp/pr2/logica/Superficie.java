@@ -1,8 +1,8 @@
 package tp.pr2.logica;
 
 /**
- * Esta clase representa la supercie donde transcurre la evolucion de las
- * celulas. La supercie la vamos a representar mediante una matriz de celulas,
+ * Esta clase representa la super cie donde transcurre la evolucion de las
+ * celulas. La super cie la vamos a representar mediante una matriz de celulas,
  * cuyo tamaño queda determinado por su numero de filas y columnas.
  * 
  * @version 1.0, 07/11/2015
@@ -63,9 +63,8 @@ public class Superficie {
 		superficie = new Celula[nf][nc];
 		// Se crean células en las posiciones indicadas.
 		for (i = 0; i < nf * nc; i++) {
-			Casilla cas = new Casilla(i / nc, i % nc); // Se entiende que la
-														// matriz no es vacía
-														// (0x0)
+			// Se entiende que la matriz no es vacía (0x0)
+			Casilla cas = new Casilla(i / nc, i % nc);
 			if (aleatorio[i] == 1)
 				crearCelulaSimple(cas);
 			else if (aleatorio[i] == 2)
@@ -82,6 +81,7 @@ public class Superficie {
 	 */
 
 	/**
+	 * Indica las filas de la superficie.
 	 * 
 	 * @return numero de filas de la superficie
 	 */
@@ -90,6 +90,7 @@ public class Superficie {
 	}
 
 	/**
+	 * Indica las columnas de la superficie.
 	 * 
 	 * @return numero de columnas de la superficie
 	 */
@@ -98,7 +99,7 @@ public class Superficie {
 	}
 
 	/**
-	 * Dada una casilla crea una celula simple en dicha posicion
+	 * Dada una casilla crea una celula simple en dicha posicion.
 	 * 
 	 * @param casilla
 	 *            destino
@@ -113,7 +114,7 @@ public class Superficie {
 	}
 
 	/**
-	 * Dada una casilla crea una celula compleja en dicha posicion
+	 * Dada una casilla crea una celula compleja en dicha posicion.
 	 * 
 	 * @param casilla
 	 *            destino
@@ -156,7 +157,7 @@ public class Superficie {
 
 	/**
 	 * Dada una casilla, ejecuta un paso sobre la celula que hay en ella, si aun
-	 * no se ha movido en ese turno (mover, reproducirse...)
+	 * no se ha movido en ese turno (mover, reproducirse...).
 	 * 
 	 * @param origen
 	 *            origen
@@ -187,18 +188,17 @@ public class Superficie {
 		}
 		if (cont != 0) {
 			int aleatorio = (int) (Math.random() * cont);
-			destino = new Casilla(libres[aleatorio].getX(),libres[aleatorio].getY()); 
+			destino = new Casilla(libres[aleatorio].getX(), libres[aleatorio].getY());
 		}
 		return destino;
 	}
 
 	/*
 	 * if(cont == 0){ //No se puede mover //Le toca reproducirse. destino =
-	 * null; if(ini.incPasDad()){ eliminarCelula(origen);
-	 * System.out.println("Muere la celula de la casilla " + origen +
-	 * " por no reproducirse"); } //No le toca reproducirse. Aumentan sus pasos
-	 * no dados. else if(ini.incPasNoMov()){ //Decide si debe morir
-	 * eliminarCelula(origen);
+	 * null; if(ini.incPasDad()){ eliminarCelula(origen); System.out.println(
+	 * "Muere la celula de la casilla " + origen + " por no reproducirse"); }
+	 * //No le toca reproducirse. Aumentan sus pasos no dados. else
+	 * if(ini.incPasNoMov()){ //Decide si debe morir eliminarCelula(origen);
 	 * System.out.println("Muere la celula de la casilla " + origen +
 	 * " por falta de actividad."); } } else{ //Se puede mover int aleatorio =
 	 * (int)(Math.random()*cont); destino = libres[aleatorio]; //Indica la
@@ -206,22 +206,21 @@ public class Superficie {
 	 * superficie[destino.getX()][destino.getY()]; fin = ini;
 	 * fin.setMovidoTrue(); System.out.println("Movimiento de " + origen + " a "
 	 * + destino); eliminarCelula(origen); //Le toca reproducirse.
-	 * if(fin.incPasDad()){ crearCelulaSimple(origen);
-	 * System.out.println("Nace nueva celula en " + origen +
-	 * " cuyo padre ha sido "+destino); } //No le toca reproducirse. //No hace
-	 * nada. } } return destino; }
+	 * if(fin.incPasDad()){ crearCelulaSimple(origen); System.out.println(
+	 * "Nace nueva celula en " + origen + " cuyo padre ha sido "+destino); }
+	 * //No le toca reproducirse. //No hace nada. } } return destino; }
 	 */
 
 	public Casilla evolucionarCelulaCompleja(Casilla origen) {
 		int aleatorio = (int) (Math.random() * filas * columnas - 1);
 		if (aleatorio >= origen.getX() * columnas + origen.getY())
 			aleatorio++; /*
-						 * En caso de que la casilla aleatoria esté por delante
-						 * o sea la casilla donde se encuentra la célula a
-						 * mover, se suma uno, para corregir la posición.
-						 */
-		Casilla destino = new Casilla(aleatorio / columnas, aleatorio
-				% columnas);
+							 * En caso de que la casilla aleatoria esté por
+							 * delante o sea la casilla donde se encuentra la
+							 * célula a mover, se suma uno, para corregir la
+							 * posición.
+							 */
+		Casilla destino = new Casilla(aleatorio / columnas, aleatorio % columnas);
 		Celula fin = superficie[destino.getX()][destino.getY()];
 		Celula ini = superficie[origen.getX()][origen.getY()];
 		if (fin == null) {
