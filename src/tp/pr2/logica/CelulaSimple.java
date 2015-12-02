@@ -1,5 +1,7 @@
 package tp.pr2.logica;
 
+import tp.pr2.logica.Casilla;
+
 /**
  * Esta clase representa una celula del mundo. Contiene atributos privados para
  * contabilizar el numero de pasos en los que la celula no se ha movido y el
@@ -72,21 +74,38 @@ public class CelulaSimple extends Celula {
 	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie) {
 		Casilla origen = new Casilla(f, c);
 		Casilla destino = superficie.evolucionarCelulaSimple(origen);
-		if (incPasDad()) {
-			if (destino == null) {
+		if (destino == null) { // No se puede mover
+			// Le toca reproducirse.
+			if (incPasDad()) {
 				superficie.eliminarCelula(origen);
-				// comentario
-			} else {
-				// CREAR METODO EN SUPERFICIE QUE MUEVA CELULA DE CASILLA ORIGEN
-				// A DESTINO
+				System.out.println("Muere la celula de la casilla " + origen + " por no reproducirse");
 			}
-		}
-		// No le toca reproducirse. Aumentan sus pasos no dados.
-		else if (incPasNoMov()) { // Decide si debe morir
+			// No le toca reproducirse. Aumentan sus pasos no dados.
+			else if (incPasNoMov()) { // Decide si debe morir
+				superficie.eliminarCelula(origen);
+				System.out.println("Muere la celula de la casilla " + origen + " por falta de actividad.");
+			}
+		} else/* if (destino != null) */ { // Se puede mover
+			superficie.moverA(origen, destino);
+			System.out.println("Movimiento de " + origen + " a " + destino);
 			superficie.eliminarCelula(origen);
-			// comentario
+			// Le toca reproducirse.
+			if (incPasDad()) {
+				superficie.crearCelulaSimple(origen);
+				System.out.println("Nace nueva celula en " + origen + " cuyo padre ha sido " + destino);
+			}
+			// No le toca reproducirse.
+			// No hace nada.
 		}
-
+		/*
+		 * if (incPasDad()) { // Le toca reproducirse if (destino == null) {
+		 * superficie.eliminarCelula(origen); // comentario } else { // CREAR
+		 * METODO EN SUPERFICIE QUE MUEVA CELULA DE CASILLA ORIGEN // A DESTINO
+		 * } } // No le toca reproducirse. Aumentan sus pasos no dados. else if
+		 * (incPasNoMov()) { // Decide si debe morir
+		 * superficie.eliminarCelula(origen); // comentario }
+		 */
+		return destino;
 	}
 
 	/**

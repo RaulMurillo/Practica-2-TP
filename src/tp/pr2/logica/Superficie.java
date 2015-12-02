@@ -24,7 +24,9 @@ public class Superficie {
 	 * @param nc
 	 *            El numero de columnas de la matriz. Debe ser mayor que 0.
 	 * @param numCels
-	 *            El numero de celulas con las que se iniciara.
+	 *            El numero de celulas simples con las que se iniciara.
+	 * @param numComplejas
+	 *            El numero de celulas complejas con las que se iniciara.
 	 */
 	public Superficie(int nf, int nc, int numSimples, int numComplejas) {
 		this.filas = nf;
@@ -52,6 +54,7 @@ public class Superficie {
 		 * Utilizamos una variante del algoritmo de Fisher-Yates para conseguir
 		 * un barajado eficiente y sin desviaciones en las posibles
 		 * permutaciones (todas son asi equiprobables).
+		 * https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 		 */
 		while (i > 1) {
 			i--;
@@ -99,7 +102,7 @@ public class Superficie {
 	}
 
 	/**
-	 * Dada una casilla crea una celula simple en dicha posicion.
+	 * Dada una casilla, crea una celula simple en dicha posicion.
 	 * 
 	 * @param casilla
 	 *            destino
@@ -114,7 +117,7 @@ public class Superficie {
 	}
 
 	/**
-	 * Dada una casilla crea una celula compleja en dicha posicion.
+	 * Dada una casilla, crea una celula compleja en dicha posicion.
 	 * 
 	 * @param casilla
 	 *            destino
@@ -156,11 +159,25 @@ public class Superficie {
 	}
 
 	/**
-	 * Dada una casilla, ejecuta un paso sobre la celula que hay en ella, si aun
-	 * no se ha movido en ese turno (mover, reproducirse...).
+	 * Permite indicar a la célula de la posición (f,c) que evolucione de
+	 * acuerdo a sus reglas.
+	 * 
+	 * @param f
+	 *            fila de la casilla.
+	 * @param c
+	 *            columna de la casilla.
+	 * @return casilla a la que se ha movido (o null) en caso de no moverse.
+	 */
+	public Casilla ejecutaMovimiento(int f, int c) {
+		return superficie[f][c].ejecutaMovimiento(f, c, superficie);
+	}
+
+	/**
+	 * Dada una casilla, ejecuta un paso sobre la celula simple que hay en ella,
+	 * si aun no se ha movido en ese turno (mover, reproducirse...).
 	 * 
 	 * @param origen
-	 *            origen
+	 *            casilla que evalua
 	 */
 	public Casilla evolucionarCelulaSimple(Casilla origen) {
 		// Si no está vacía y no se ha movido aún.
@@ -193,24 +210,13 @@ public class Superficie {
 		return destino;
 	}
 
-	/*
-	 * if(cont == 0){ //No se puede mover //Le toca reproducirse. destino =
-	 * null; if(ini.incPasDad()){ eliminarCelula(origen); System.out.println(
-	 * "Muere la celula de la casilla " + origen + " por no reproducirse"); }
-	 * //No le toca reproducirse. Aumentan sus pasos no dados. else
-	 * if(ini.incPasNoMov()){ //Decide si debe morir eliminarCelula(origen);
-	 * System.out.println("Muere la celula de la casilla " + origen +
-	 * " por falta de actividad."); } } else{ //Se puede mover int aleatorio =
-	 * (int)(Math.random()*cont); destino = libres[aleatorio]; //Indica la
-	 * casilla a la que se mueve la célula. Celula fin =
-	 * superficie[destino.getX()][destino.getY()]; fin = ini;
-	 * fin.setMovidoTrue(); System.out.println("Movimiento de " + origen + " a "
-	 * + destino); eliminarCelula(origen); //Le toca reproducirse.
-	 * if(fin.incPasDad()){ crearCelulaSimple(origen); System.out.println(
-	 * "Nace nueva celula en " + origen + " cuyo padre ha sido "+destino); }
-	 * //No le toca reproducirse. //No hace nada. } } return destino; }
+	/**
+	 * Dada una casilla, ejecuta un paso sobre la celula compleja que hay en
+	 * ella, si aun no se ha movido en ese turno (mover, reproducirse...).
+	 * 
+	 * @param origen
+	 *            casilla que evalua
 	 */
-
 	public Casilla evolucionarCelulaCompleja(Casilla origen) {
 		int aleatorio = (int) (Math.random() * filas * columnas - 1);
 		if (aleatorio >= origen.getX() * columnas + origen.getY())
@@ -222,18 +228,11 @@ public class Superficie {
 							 */
 		Casilla destino = new Casilla(aleatorio / columnas, aleatorio % columnas);
 		Celula fin = superficie[destino.getX()][destino.getY()];
-		Celula ini = superficie[origen.getX()][origen.getY()];
-		if (fin == null) {
-			fin = ini;
-			eliminarCelula(origen);
-			fin.setMovidoTrue();
-		} else if (fin.esComestible) {
-			if (ini.comidas())
-				fin = ini;
-			eliminarCelula(origen);
-			fin.setMovidoTrue();
-
-		}
+		/**/Celula ini = superficie[origen.getX()][origen.getY()];
+		if (!fin.esComestible && fin != null) // En la casilla destino hay una
+												// célula compleja
+			destino = null;
+		return destino;
 	}
 
 	/**
@@ -266,5 +265,27 @@ public class Superficie {
 			tabla += "\n";
 		}
 		return tabla;
+	}
+
+	/**
+	 * Indica si una casilla contiene una celula comestible.
+	 * 
+	 * @param casilla
+	 *            a evaluar.
+	 * @return true si la celula de la casilla es comestible.
+	 */
+	public boolean esComestible(Casilla casilla) {
+		return superficie[casilla.getX()][casilla.getY()].esComestible;
+	}
+
+	/**
+	 * Mueve la celula de una casilla a otra.
+	 * 
+	 * @param origen
+	 * @param destino
+	 */
+	public void moverA(Casilla origen, Casilla destino) {
+		superficie[destino.getX()][destino.getY()] = superficie[origen.getX()][origen.getY()];
+		superficie[destino.getX()][destino.getY()].setMovidoTrue();
 	}
 }

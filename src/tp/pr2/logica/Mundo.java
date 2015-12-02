@@ -17,6 +17,8 @@ public class Mundo {
 										// inicia la superficie.
 	public final int FILAS = 3; // nº de filas de la superficie.
 	public final int COLUMNAS = 3; // nº de columnas de la superficie.
+	private boolean simulacionTerminada; // controla cuando termina la
+											// simulación.
 
 	/**
 	 * Inicializa la supercie colocando un numero de celulas en posiciones
@@ -24,10 +26,11 @@ public class Mundo {
 	 */
 	public Mundo() {
 		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES, NUMCOMPLEJAS);
+		this.simulacionTerminada = true;
 	}
 
 	/**
-	 * Dadas unas coordenadas, crea una celula en dicha posicion de la
+	 * Dadas unas coordenadas, crea una celula simple en dicha posicion de la
 	 * superficie.
 	 * 
 	 * @param f
@@ -36,12 +39,31 @@ public class Mundo {
 	 *            coordenada columna
 	 * @return true si se ha creado la celula.
 	 */
-	public boolean crearCelula(int f, int c) {
+	public boolean crearCelulaSimple(int f, int c) {
 		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie.getColumnas()))
 			return false;
 		else {
 			Casilla cas = new Casilla(f, c);
-			return superficie.crearCelula(cas);
+			return superficie.crearCelulaSimple(cas);
+		}
+	}
+
+	/**
+	 * Dadas unas coordenadas, crea una celula compleja en dicha posicion de la
+	 * superficie.
+	 * 
+	 * @param f
+	 *            coordenada fila
+	 * @param c
+	 *            coordenada columna
+	 * @return true si se ha creado la celula.
+	 */
+	public boolean crearCelulaCompleja(int f, int c) {
+		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie.getColumnas()))
+			return false;
+		else {
+			Casilla cas = new Casilla(f, c);
+			return superficie.crearCelulaCompleja(cas);
 		}
 	}
 
@@ -72,15 +94,16 @@ public class Mundo {
 	}
 
 	/**
-	 * Para cada celula de la super cie ejecuta un paso de acuerdo a las reglas
+	 * Para cada celula de la superficie ejecuta un paso de acuerdo a las reglas
 	 * descritas.
 	 */
 	public void evoluciona() {
 		superficie.setSuperficieFalse();
 		for (int i = 0; i < superficie.getFilas(); i++) {
 			for (int j = 0; j < superficie.getColumnas(); j++) {
-				Casilla cas = new Casilla(i, j);
-				superficie.evolucionarCelula(cas);
+				// Casilla cas = new Casilla(i, j);
+				superficie.ejecutaMovimiento(i, j);
+				// superficie.evolucionarCelula(cas);
 			}
 		}
 	}
@@ -90,5 +113,14 @@ public class Mundo {
 	 */
 	public String toString() {
 		return superficie.toString();
+	}
+
+	/**
+	 * Indica si la simulacion ha terminado.
+	 * 
+	 * @return true si la simulacion ha terminado.
+	 */
+	public boolean simulacionTerminada() {
+		return this.simulacionTerminada;
 	}
 }
