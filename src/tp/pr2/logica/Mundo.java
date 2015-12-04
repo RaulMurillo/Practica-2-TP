@@ -11,14 +11,14 @@ package tp.pr2.logica;
 
 public class Mundo {
 	private Superficie superficie;
-	public final int NUMSIMPLES = 3; // nº de células simples con las que se
+	public final int NUMSIMPLES = 5; // nº de células simples con las que se
 										// inicia la superficie.
 	public final int NUMCOMPLEJAS = 2; // nº de células simples con las que se
 										// inicia la superficie.
 	public final int FILAS = 3; // nº de filas de la superficie.
 	public final int COLUMNAS = 3; // nº de columnas de la superficie.
 	private boolean simulacionTerminada; // controla cuando termina la
-											// simulación.
+											// simulacion.
 
 	/**
 	 * Inicializa la supercie colocando un numero de celulas en posiciones
@@ -101,9 +101,7 @@ public class Mundo {
 		superficie.setSuperficieFalse();
 		for (int i = 0; i < superficie.getFilas(); i++) {
 			for (int j = 0; j < superficie.getColumnas(); j++) {
-				// Casilla cas = new Casilla(i, j);
 				superficie.ejecutaMovimiento(i, j);
-				// superficie.evolucionarCelula(cas);
 			}
 		}
 	}
@@ -120,7 +118,11 @@ public class Mundo {
 	 * 
 	 * @return true si la simulacion ha terminado.
 	 */
-	public boolean simulacionTerminada() {
+	public boolean getSimulacionTerminada() {
 		return this.simulacionTerminada;
+	}
+	
+	public void setSimulacionTerminadaFalse(){
+		this.simulacionTerminada = false;
 	}
 }

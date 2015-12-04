@@ -62,7 +62,7 @@ public class Controlador {
 			} else if (comando.equals(CREARCELULA)) {
 				int x = in.nextInt();
 				int y = in.nextInt();
-				if (!mundo.crearCelula/*Simple*/(x, y))
+				if (!mundo.crearCelulaSimple/*Simple*/(x, y))
 					System.out.println("Imposible crear celula, posición no válida.");
 				else
 					System.out.println("Creamos nueva celula en la posición: (" + x + "," + y + ")");
@@ -72,7 +72,7 @@ public class Controlador {
 				if (!mundo.eliminarCelula(x, y))
 					System.out.println("Imposible eliminar celula, posición no válida.");
 				else
-					System.out.println("Se ha eliminado la célula de la posición: (" + x + "," + y + ")");
+					System.out.println("Se ha eliminado la calula de la posicion: (" + x + "," + y + ")");
 			} else if (comando.equals(AYUDA)) {
 				System.out.println("POSIBLES COMANDOS: \n" + "  PASO: realiza un paso en la simulacion \n"
 						+ "  AYUDA: muestra esta ayuda \n" + "  SALIR: cierra la aplicación \n"

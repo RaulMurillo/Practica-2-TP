@@ -169,7 +169,10 @@ public class Superficie {
 	 * @return casilla a la que se ha movido (o null) en caso de no moverse.
 	 */
 	public Casilla ejecutaMovimiento(int f, int c) {
-		return superficie[f][c].ejecutaMovimiento(f, c, superficie);
+		if (superficie[f][c] != null && !superficie[f][c].getMovido()) {
+			return superficie[f][c].ejecutaMovimiento(f, c, this);
+		} else
+			return null;
 	}
 
 	/**
@@ -205,7 +208,8 @@ public class Superficie {
 		}
 		if (cont != 0) {
 			int aleatorio = (int) (Math.random() * cont);
-			destino = new Casilla(libres[aleatorio].getX(), libres[aleatorio].getY());
+			destino = new Casilla(libres[aleatorio].getX(),
+					libres[aleatorio].getY());
 		}
 		return destino;
 	}
@@ -221,16 +225,15 @@ public class Superficie {
 		int aleatorio = (int) (Math.random() * filas * columnas - 1);
 		if (aleatorio >= origen.getX() * columnas + origen.getY())
 			aleatorio++; /*
-							 * En caso de que la casilla aleatoria esté por
-							 * delante o sea la casilla donde se encuentra la
-							 * célula a mover, se suma uno, para corregir la
-							 * posición.
-							 */
-		Casilla destino = new Casilla(aleatorio / columnas, aleatorio % columnas);
-		Celula fin = superficie[destino.getX()][destino.getY()];
-		/**/Celula ini = superficie[origen.getX()][origen.getY()];
-		if (!fin.esComestible && fin != null) // En la casilla destino hay una
-												// célula compleja
+						 * En caso de que la casilla aleatoria este por delante
+						 * o sea la casilla donde se encuentra la celula a
+						 * mover, se suma uno, para corregir la posicion.
+						 */
+		Casilla destino = new Casilla(aleatorio / columnas, aleatorio
+				% columnas);
+		if (superficie[destino.getX()][destino.getY()] != null
+				&& !superficie[destino.getX()][destino.getY()].esComestible)
+			// En la casilla destino hay una celula compleja
 			destino = null;
 		return destino;
 	}
@@ -285,7 +288,13 @@ public class Superficie {
 	 * @param destino
 	 */
 	public void moverA(Casilla origen, Casilla destino) {
-		superficie[destino.getX()][destino.getY()] = superficie[origen.getX()][origen.getY()];
+		superficie[destino.getX()][destino.getY()] = superficie[origen.getX()][origen
+				.getY()];
 		superficie[destino.getX()][destino.getY()].setMovidoTrue();
+		eliminarCelula(origen);
+	}
+	
+	public boolean vacia(Casilla cas){
+		return (superficie[cas.getX()][cas.getY()]==null);
 	}
 }

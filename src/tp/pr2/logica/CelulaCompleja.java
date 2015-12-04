@@ -1,7 +1,7 @@
 package tp.pr2.logica;
 
 public class CelulaCompleja extends Celula {
-	public final int MAX_COMER = 3;
+	public final int MAX_COMER = 1;
 	private int comidas;
 
 	/**
@@ -34,14 +34,20 @@ public class CelulaCompleja extends Celula {
 		Casilla destino = superficie.evolucionarCelulaCompleja(origen);
 		if (destino != null) {
 			System.out.print("Celula compleja en " + origen + " se mueve a " + destino);
-			if (superficie.esComestible(destino)) {
-				System.out.print(" --COME--" + '\n');
-				if (comidas())
-					System.out.println("Explota la celula compleja en" + destino);
-			} else /* if (destino esta libre) */ 
-				System.out.print(" --NO COME--" + '\n');
 			superficie.moverA(origen, destino);
-			superficie.eliminarCelula(origen);
+			if (!superficie.vacia(destino)) {
+				//Si la casilla no esta vacia debe haber una celula simple
+				//Si no se habria devuelto null
+				System.out.print(" --COME--" + '\n');
+				if (comidas()){
+					System.out.println("Explota la celula compleja en " + destino);
+					superficie.eliminarCelula(destino);
+				}
+			}
+			else /* if (destino esta libre) */ 
+				System.out.print(" --NO COME--" + '\n');
+			
+			
 		}
 		return destino;
 	}

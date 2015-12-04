@@ -32,7 +32,7 @@ public class CelulaSimple extends Celula {
 	}
 
 	/**
-	 * Incrementa el nÂº de pasos que ha dado una celula (se haya movido o no) e
+	 * Incrementa el nº de pasos que ha dado una celula (se haya movido o no) e
 	 * indica si le toca reproducirse.
 	 * 
 	 * @return true si le toca reproducirse.
@@ -88,7 +88,6 @@ public class CelulaSimple extends Celula {
 		} else/* if (destino != null) */ { // Se puede mover
 			superficie.moverA(origen, destino);
 			System.out.println("Movimiento de " + origen + " a " + destino);
-			superficie.eliminarCelula(origen);
 			// Le toca reproducirse.
 			if (incPasDad()) {
 				superficie.crearCelulaSimple(origen);
@@ -97,14 +96,6 @@ public class CelulaSimple extends Celula {
 			// No le toca reproducirse.
 			// No hace nada.
 		}
-		/*
-		 * if (incPasDad()) { // Le toca reproducirse if (destino == null) {
-		 * superficie.eliminarCelula(origen); // comentario } else { // CREAR
-		 * METODO EN SUPERFICIE QUE MUEVA CELULA DE CASILLA ORIGEN // A DESTINO
-		 * } } // No le toca reproducirse. Aumentan sus pasos no dados. else if
-		 * (incPasNoMov()) { // Decide si debe morir
-		 * superficie.eliminarCelula(origen); // comentario }
-		 */
 		return destino;
 	}
 
