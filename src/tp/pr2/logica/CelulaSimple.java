@@ -3,7 +3,7 @@ package tp.pr2.logica;
 import tp.pr2.logica.Casilla;
 
 /**
- * Esta clase representa una celula del mundo. Contiene atributos privados para
+ * Esta clase representa una celula simple del mundo. Contiene atributos privados para
  * contabilizar el numero de pasos en los que la celula no se ha movido y el
  * numero de pasos dados (tanto si se ha movido como si no) realizados en el
  * mundo.
@@ -32,7 +32,7 @@ public class CelulaSimple extends Celula {
 	}
 
 	/**
-	 * Incrementa el n∫ de pasos que ha dado una celula (se haya movido o no) e
+	 * Incrementa el numero de pasos que ha dado una celula (se haya movido o no) e
 	 * indica si le toca reproducirse.
 	 * 
 	 * @return true si le toca reproducirse.
@@ -49,7 +49,7 @@ public class CelulaSimple extends Celula {
 	 * Indica si la celula debe morir por inactividad. Si no, incrementa el
 	 * numero de pasos que lleva la celula sin moverse.
 	 * 
-	 * @return true si ha llegado al maximo permitido y la c√©lula debe morir.
+	 * @return true si ha llegado al maximo permitido y la celula debe morir.
 	 */
 	public boolean incPasNoMov() {
 		pasosNoMovidos++;

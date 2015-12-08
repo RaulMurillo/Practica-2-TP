@@ -1,5 +1,14 @@
 package tp.pr2.logica;
-
+/**
+ * Esta clase representa una celula compleja del mundo. Contiene
+ * un atributo privado para contabilizar cuantas celulas se ha
+ * comido y una constante publica para ver si se ha comido el
+ * maximo posible de celulas
+ * 
+ * @version 1.0, 07/11/2015
+ * @author Raul Murillo Montero
+ * @author Antonio Valdivia de la Torre
+ */
 public class CelulaCompleja extends Celula {
 	public final int MAX_COMER = 1;
 	private int comidas;

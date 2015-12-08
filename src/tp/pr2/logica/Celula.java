@@ -51,13 +51,9 @@ abstract public class Celula {
 	/**
 	 * Realiza el movimiento de una celula colocada en la posicion (f, c) de la
 	 * superficie.
-	 * 
-	 * @param f
-	 *            coordenada fila
-	 * @param c
-	 *            coordenada columna
-	 * @param superficie
-	 *            superficie donde se encuentra la celula
+	 * @param f coordenada fila
+	 * @param c coordenada columna
+	 * @param superficie superficie donde se encuentra la celula
 	 * @return casilla a la que se ha movido la celula, null en caso contrario
 	 */
 	public abstract Casilla ejecutaMovimiento(int f, int c, Superficie superficie);

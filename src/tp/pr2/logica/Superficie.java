@@ -293,8 +293,8 @@ public class Superficie {
 		superficie[destino.getX()][destino.getY()].setMovidoTrue();
 		eliminarCelula(origen);
 	}
-	
-	public boolean vacia(Casilla cas){
-		return (superficie[cas.getX()][cas.getY()]==null);
+
+	public boolean vacia(Casilla cas) {
+		return (superficie[cas.getX()][cas.getY()] == null);
 	}
 }

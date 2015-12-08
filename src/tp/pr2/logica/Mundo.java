@@ -33,10 +33,8 @@ public class Mundo {
 	 * Dadas unas coordenadas, crea una celula simple en dicha posicion de la
 	 * superficie.
 	 * 
-	 * @param f
-	 *            coordenada fila
-	 * @param c
-	 *            coordenada columna
+	 * @param f  coordenada fila
+	 * @param c coordenada columna
 	 * @return true si se ha creado la celula.
 	 */
 	public boolean crearCelulaSimple(int f, int c) {
@@ -52,10 +50,8 @@ public class Mundo {
 	 * Dadas unas coordenadas, crea una celula compleja en dicha posicion de la
 	 * superficie.
 	 * 
-	 * @param f
-	 *            coordenada fila
-	 * @param c
-	 *            coordenada columna
+	 * @param f coordenada fila
+	 * @param c coordenada columna
 	 * @return true si se ha creado la celula.
 	 */
 	public boolean crearCelulaCompleja(int f, int c) {
@@ -71,10 +67,8 @@ public class Mundo {
 	 * Dadas unas coordenadas, elimina una celula en dicha posicion de la
 	 * superficie.
 	 * 
-	 * @param f
-	 *            coordenada fila
-	 * @param c
-	 *            coordenada columna
+	 * @param f coordenada fila
+	 * @param c coordenada columna
 	 * @return true si se ha eliminado la celula.
 	 */
 	public boolean eliminarCelula(int f, int c) {
