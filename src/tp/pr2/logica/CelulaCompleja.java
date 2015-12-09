@@ -1,9 +1,9 @@
 package tp.pr2.logica;
+
 /**
- * Esta clase representa una celula compleja del mundo. Contiene
- * un atributo privado para contabilizar cuantas celulas se ha
- * comido y una constante publica para ver si se ha comido el
- * maximo posible de celulas
+ * Esta clase representa una celula compleja del mundo. Contiene un atributo
+ * privado para contabilizar cuantas celulas se ha comido y una constante
+ * publica para ver si se ha comido el maximo posible de celulas
  * 
  * @version 1.0, 07/11/2015
  * @author Raul Murillo Montero
@@ -43,20 +43,19 @@ public class CelulaCompleja extends Celula {
 		Casilla destino = superficie.evolucionarCelulaCompleja(origen);
 		if (destino != null) {
 			System.out.print("Celula compleja en " + origen + " se mueve a " + destino);
-			superficie.moverA(origen, destino);
 			if (!superficie.vacia(destino)) {
-				//Si la casilla no esta vacia debe haber una celula simple
-				//Si no se habria devuelto null
+				// Si la casilla no esta vacia debe haber una celula simple
+				// Si no se habria devuelto null
+				superficie.moverA(origen, destino);
 				System.out.print(" --COME--" + '\n');
-				if (comidas()){
+				if (comidas()) {
 					System.out.println("Explota la celula compleja en " + destino);
 					superficie.eliminarCelula(destino);
 				}
-			}
-			else /* if (destino esta libre) */ 
+			} else { /* if (destino esta libre) */
+				superficie.moverA(origen, destino);
 				System.out.print(" --NO COME--" + '\n');
-			
-			
+			}
 		}
 		return destino;
 	}

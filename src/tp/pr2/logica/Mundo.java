@@ -2,7 +2,8 @@ package tp.pr2.logica;
 
 /**
  * Esta clase contiene a la superficie. Tambien contiene constantes con la
- * dimension de la superficie y las celulas iniciales.
+ * dimension de la superficie y las celulas iniciales y un atributo que indica
+ * si se ha terminado o no la simulacion.
  * 
  * @version 1.0, 07/11/2015
  * @author Raul Murillo Montero
@@ -26,15 +27,22 @@ public class Mundo {
 	 */
 	public Mundo() {
 		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES, NUMCOMPLEJAS);
-		this.simulacionTerminada = true;
+		this.simulacionTerminada = false;
+	}
+	
+	public void iniciarMundo (){
+		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES, NUMCOMPLEJAS);
+		//this.simulacionTerminada = false;
 	}
 
 	/**
 	 * Dadas unas coordenadas, crea una celula simple en dicha posicion de la
 	 * superficie.
 	 * 
-	 * @param f  coordenada fila
-	 * @param c coordenada columna
+	 * @param f
+	 *            coordenada fila
+	 * @param c
+	 *            coordenada columna
 	 * @return true si se ha creado la celula.
 	 */
 	public boolean crearCelulaSimple(int f, int c) {
@@ -50,8 +58,10 @@ public class Mundo {
 	 * Dadas unas coordenadas, crea una celula compleja en dicha posicion de la
 	 * superficie.
 	 * 
-	 * @param f coordenada fila
-	 * @param c coordenada columna
+	 * @param f
+	 *            coordenada fila
+	 * @param c
+	 *            coordenada columna
 	 * @return true si se ha creado la celula.
 	 */
 	public boolean crearCelulaCompleja(int f, int c) {
@@ -67,8 +77,10 @@ public class Mundo {
 	 * Dadas unas coordenadas, elimina una celula en dicha posicion de la
 	 * superficie.
 	 * 
-	 * @param f coordenada fila
-	 * @param c coordenada columna
+	 * @param f
+	 *            coordenada fila
+	 * @param c
+	 *            coordenada columna
 	 * @return true si se ha eliminado la celula.
 	 */
 	public boolean eliminarCelula(int f, int c) {
@@ -115,8 +127,8 @@ public class Mundo {
 	public boolean getSimulacionTerminada() {
 		return this.simulacionTerminada;
 	}
-	
-	public void setSimulacionTerminadaFalse(){
-		this.simulacionTerminada = false;
+
+	public void setSimulacionTerminadaTrue() {
+		this.simulacionTerminada = true;
 	}
 }
