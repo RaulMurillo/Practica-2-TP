@@ -34,7 +34,8 @@ public class CrearCelulaSimple extends Comando {
 	 */
 	public void ejecuta(Mundo mundo) {
 		if (!mundo.crearCelulaSimple(f, c)) {
-			System.out.println("No se pudo crear la celula, " + "posición no válida");
+			System.out.println("No se pudo crear la celula, "
+					+ "posición no válida");
 		}
 	}
 
@@ -43,9 +44,14 @@ public class CrearCelulaSimple extends Comando {
 	 * @return Devuelve el codigo de ayuda referente a crear celula simple.
 	 */
 	public String textoAyuda() {
-		return ("Crea una nueva celula simple en la posicion " + "(f,c) si es posible.");
+		return ("CREARCELULASIMPLE f c: Crea una nueva celula simple en la posicion "
+				+ "(f,c) si es posible");
 	}
 
+	/**
+	 * @return el comando CrearCelulaSimple si el array de strings se
+	 *         corresponde con este, null en otro caso
+	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 3)
 			return null;
@@ -57,7 +63,7 @@ public class CrearCelulaSimple extends Comando {
 			try {
 				f = Integer.parseInt(cadenaComando[1]);
 				c = Integer.parseInt(cadenaComando[2]);
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException e) { // Gestion de errores
 				return null;
 			}
 			return new CrearCelulaSimple(f, c);

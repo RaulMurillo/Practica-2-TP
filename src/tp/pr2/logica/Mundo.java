@@ -5,34 +5,41 @@ package tp.pr2.logica;
  * dimension de la superficie y las celulas iniciales y un atributo que indica
  * si se ha terminado o no la simulacion.
  * 
- * @version 1.0, 07/11/2015
+ * @version 2.1, 09/12/2015
  * @author Raul Murillo Montero
  * @author Antonio Valdivia de la Torre
  */
 
 public class Mundo {
 	private Superficie superficie;
-	public final int NUMSIMPLES = 5; // nº de células simples con las que se
-										// inicia la superficie.
-	public final int NUMCOMPLEJAS = 2; // nº de células simples con las que se
-										// inicia la superficie.
-	public final int FILAS = 3; // nº de filas de la superficie.
-	public final int COLUMNAS = 3; // nº de columnas de la superficie.
-	private boolean simulacionTerminada; // controla cuando termina la
-											// simulacion.
+	// nº de células simples con las que se inicia la superficie.
+	public final int NUMSIMPLES = 5;
+	// nº de células simples con las que se inicia la superficie.
+	public final int NUMCOMPLEJAS = 2;
+	// nº de filas de la superficie.
+	public final int FILAS = 3;
+	// nº de columnas de la superficie.
+	public final int COLUMNAS = 3;
+	// controla cuando termina la simulacion.
+	private boolean simulacionTerminada;
 
 	/**
 	 * Inicializa la supercie colocando un numero de celulas en posiciones
 	 * aleatorias de esta.
 	 */
 	public Mundo() {
-		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES, NUMCOMPLEJAS);
+		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES,
+				NUMCOMPLEJAS);
 		this.simulacionTerminada = false;
 	}
 	
-	public void iniciarMundo (){
-		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES, NUMCOMPLEJAS);
-		//this.simulacionTerminada = false;
+	/**
+	 * Reinicia un mundo de forma aleatoria
+	 */
+	public void iniciarMundo() {
+		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES,
+				NUMCOMPLEJAS);
+		// this.simulacionTerminada = false;
 	}
 
 	/**
@@ -46,7 +53,8 @@ public class Mundo {
 	 * @return true si se ha creado la celula.
 	 */
 	public boolean crearCelulaSimple(int f, int c) {
-		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie.getColumnas()))
+		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie
+				.getColumnas()))
 			return false;
 		else {
 			Casilla cas = new Casilla(f, c);
@@ -65,7 +73,8 @@ public class Mundo {
 	 * @return true si se ha creado la celula.
 	 */
 	public boolean crearCelulaCompleja(int f, int c) {
-		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie.getColumnas()))
+		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie
+				.getColumnas()))
 			return false;
 		else {
 			Casilla cas = new Casilla(f, c);
@@ -84,7 +93,8 @@ public class Mundo {
 	 * @return true si se ha eliminado la celula.
 	 */
 	public boolean eliminarCelula(int f, int c) {
-		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie.getColumnas()))
+		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie
+				.getColumnas()))
 			return false;
 		else {
 			Casilla cas = new Casilla(f, c);

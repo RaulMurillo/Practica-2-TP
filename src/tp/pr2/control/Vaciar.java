@@ -20,9 +20,13 @@ public class Vaciar extends Comando {
 	}
 
 	public String textoAyuda() {
-		return ("Crea un mundo vacio");
+		return ("VACIAR: Crea un mundo vacio");
 	}
 
+	/**
+	 * @return el comando Vaciar si el array de strings se corresponde con este,
+	 *         null en otro caso
+	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 1)
 			return null;

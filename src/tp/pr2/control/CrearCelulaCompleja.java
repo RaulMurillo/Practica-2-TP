@@ -4,7 +4,7 @@ import tp.pr2.logica.*;
 
 /**
  * Clase que implementa el comando crear celula compleja con atributos f, c para
- * indicar en que casilla se creará.
+ * indicar en que casilla se creara.
  * 
  * @version 1.0, 07/12/2015
  * @author Raul Murillo Montero
@@ -34,7 +34,8 @@ public class CrearCelulaCompleja extends Comando {
 	 */
 	public void ejecuta(Mundo mundo) {
 		if (!mundo.crearCelulaCompleja(f, c)) {
-			System.out.println("No se pudo crear la celula, " + "posición no válida");
+			System.out.println("No se pudo crear la celula, "
+					+ "posición no válida");
 		}
 	}
 
@@ -43,9 +44,13 @@ public class CrearCelulaCompleja extends Comando {
 	 * @return Devuelve el codigo de ayuda referente a crear celula compleja.
 	 */
 	public String textoAyuda() {
-		return ("Crea una nueva celula compleja en la posicion " + "(f,c) si es posible.");
+		return ("CREARCELULACOMPLEJA f c: Crea una nueva celula compleja en la posicion "
+				+ "(f,c) si es posible");
 	}
-
+	/**
+	 * @return el comando CrearCelulaCompleja si el array de strings se corresponde
+	 * con este, null en otro caso
+	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 3)
 			return null;
@@ -57,7 +62,7 @@ public class CrearCelulaCompleja extends Comando {
 			try {
 				f = Integer.parseInt(cadenaComando[1]);
 				c = Integer.parseInt(cadenaComando[2]);
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException e) { //Gestion de errores
 				return null;
 			}
 			return new CrearCelulaCompleja(f, c);

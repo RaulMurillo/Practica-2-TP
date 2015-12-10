@@ -17,9 +17,13 @@ public class Salir extends Comando {
 	}
 
 	public String textoAyuda() {
-		return ("Cierra la aplicacion");
+		return ("SALIR: Cierra la aplicacion");
 	}
 
+	/**
+	 * @return el comando Salir si el array de strings se corresponde con este,
+	 *         null en otro caso
+	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 1)
 			return null;

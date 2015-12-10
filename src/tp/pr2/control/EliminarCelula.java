@@ -34,7 +34,8 @@ public class EliminarCelula extends Comando {
 	 */
 	public void ejecuta(Mundo mundo) {
 		if (!mundo.eliminarCelula(f, c)) {
-			System.out.println("No se pudo eliminar la celula, " + "posicion no valida");
+			System.out.println("No se pudo eliminar la celula, "
+					+ "posicion no valida");
 		}
 	}
 
@@ -43,9 +44,14 @@ public class EliminarCelula extends Comando {
 	 * @return Devuelve el codigo de ayuda referente a Eliminar celula.
 	 */
 	public String textoAyuda() {
-		return ("Elimina la celula de la casilla (f, c) si es posible.");
+		return ("ELIMINARCELULA f c: Elimina la celula de la casilla (f, c)"
+				+ " si es posible");
 	}
 
+	/**
+	 * @return el comando EliminarCelula si el array de strings se corresponde
+	 *         con este, null en otro caso
+	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 3)
 			return null;
@@ -57,7 +63,7 @@ public class EliminarCelula extends Comando {
 			try {
 				f = Integer.parseInt(cadenaComando[1]);
 				c = Integer.parseInt(cadenaComando[2]);
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException e) { // Gestion de errores
 				return null;
 			}
 			return new EliminarCelula(f, c);

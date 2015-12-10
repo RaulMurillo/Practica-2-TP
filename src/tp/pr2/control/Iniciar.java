@@ -26,9 +26,13 @@ public class Iniciar extends Comando {
 	 * @return Devuelve el codigo de ayuda referente a iniciar.
 	 */
 	public String textoAyuda() {
-		return ("Inicia una nueva simulación");
+		return ("INICIAR: Inicia una nueva simulación");
 	}
 
+	/**
+	 * @return el comando Iniciar si el array de strings se corresponde con
+	 *         este, null en otro caso
+	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 1)
 			return null;

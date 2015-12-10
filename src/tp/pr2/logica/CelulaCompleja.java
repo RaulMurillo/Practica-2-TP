@@ -1,11 +1,12 @@
 package tp.pr2.logica;
 
 /**
- * Esta clase representa una celula compleja del mundo. Contiene un atributo
- * privado para contabilizar cuantas celulas se ha comido y una constante
- * publica para ver si se ha comido el maximo posible de celulas
+ * Esta clase representa una celula compleja del mundo. Contiene
+ * un atributo privado para contabilizar cuantas celulas se ha comido
+ *  y una constante publica para ver si se ha comido el maximo posible 
+ *  de celulas
  * 
- * @version 1.0, 07/11/2015
+ * @version 1.3, 09/12/2015
  * @author Raul Murillo Montero
  * @author Antonio Valdivia de la Torre
  */
@@ -32,24 +33,27 @@ public class CelulaCompleja extends Celula {
 	}
 
 	/**
-	 * Realiza el movimiento de una celula compleja colocada en la posición
+	 * Realiza el movimiento de una celula compleja colocada en la posicion
 	 * (f,c).
 	 * 
-	 * @return la casilla a la que se ha movido la celula o null en caso de que
-	 *         no se mueva la celula.
+	 * @return la casilla a la que se ha movido la celula o null en caso 
+	 * de que no se mueva la celula.
 	 */
 	public Casilla ejecutaMovimiento(int f, int c, Superficie superficie) {
 		Casilla origen = new Casilla(f, c);
 		Casilla destino = superficie.evolucionarCelulaCompleja(origen);
 		if (destino != null) {
-			System.out.print("Celula compleja en " + origen + " se mueve a " + destino);
+			System.out.print("Celula compleja en " + origen + " se mueve"
+					+ " a "
+					+ destino);
 			if (!superficie.vacia(destino)) {
 				// Si la casilla no esta vacia debe haber una celula simple
 				// Si no se habria devuelto null
 				superficie.moverA(origen, destino);
 				System.out.print(" --COME--" + '\n');
 				if (comidas()) {
-					System.out.println("Explota la celula compleja en " + destino);
+					System.out.println("Explota la celula compleja en "
+							+ destino);
 					superficie.eliminarCelula(destino);
 				}
 			} else { /* if (destino esta libre) */

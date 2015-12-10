@@ -26,9 +26,13 @@ public class Paso extends Comando {
 	 * @return Devuelve el codigo de ayuda referente a un paso.
 	 */
 	public String textoAyuda() {
-		return ("Realiza un paso en la simulacion.");
+		return ("PASO: Realiza un paso en la simulacion");
 	}
 
+	/**
+	 * @return el comando Paso si el array de strings se corresponde con este,
+	 *         null en otro caso
+	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 1)
 			return null;

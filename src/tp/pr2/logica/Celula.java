@@ -1,8 +1,8 @@
 package tp.pr2.logica;
 
 /**
- * Es una clase abstracta de la que heredan las clases concretas celula compleja
- * y celula simple
+ * Es una clase abstracta de la que heredan las clases concretas
+ * celula compleja y celula simple
  * 
  * @version 1.0, 07/11/2015
  * @author Raul Murillo Montero
@@ -11,7 +11,7 @@ package tp.pr2.logica;
 
 abstract public class Celula {
 	/*
-	 * Indicador de movimiento por turno. true si se ha movido en ese turno.
+	 * Indicador de movimiento por turno. true si se ha movido en ese turno
 	 */
 	private boolean movido;
 	/* Indica si una celula es simple(comestible)o no(compleja). */
@@ -41,22 +41,24 @@ abstract public class Celula {
 	}
 
 	/**
-	 * Pone a false el indicador de movimiento de la celula. Al inicio de cada
-	 * turno debe realizarse sobre cada celula.
+	 * Pone a false el indicador de movimiento de la celula. Al inici
+	 * o de cada turno debe realizarse sobre cada celula.
 	 */
 	public void setMovidoFalse() {
 		movido = false;
 	}
 
 	/**
-	 * Realiza el movimiento de una celula colocada en la posicion (f, c) de la
-	 * superficie.
+	 * Realiza el movimiento de una celula colocada en la posicion 
+	 * (f, c) de la superficie.
 	 * @param f coordenada fila
 	 * @param c coordenada columna
 	 * @param superficie superficie donde se encuentra la celula
-	 * @return casilla a la que se ha movido la celula, null en caso contrario
+	 * @return casilla a la que se ha movido la celula, null en
+	 *  caso contrario
 	 */
-	public abstract Casilla ejecutaMovimiento(int f, int c, Superficie superficie);
+	public abstract Casilla ejecutaMovimiento(int f, int c,
+			Superficie superficie);
 
 	/**
 	 * Indica si la celula es comestible o no.

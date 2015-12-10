@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Esta clase contiene el interprete de los posibles comandos que se pueden
  * ejecutar en consola.
  * 
- * @version 1.0, 07/11/2015
+ * @version 2.0, 09/12/2015
  * @author Raul Murillo Montero
  * @author Antonio Valdivia de la Torre
  */
