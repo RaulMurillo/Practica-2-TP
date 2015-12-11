@@ -19,7 +19,9 @@ public class CrearCelulaCompleja extends Comando {
 	 * Constructor de la clase
 	 * 
 	 * @param fila
+	 *            Coordenada X.
 	 * @param columna
+	 *            Coordenada Y.
 	 */
 	public CrearCelulaCompleja(int fila, int columna) {
 		f = fila;
@@ -31,25 +33,30 @@ public class CrearCelulaCompleja extends Comando {
 	 * muestra error.
 	 * 
 	 * @param mundo
+	 *            Mundo sobre el que se ejecuta el comando.
 	 */
 	public void ejecuta(Mundo mundo) {
 		if (!mundo.crearCelulaCompleja(f, c)) {
-			System.out.println("No se pudo crear la celula, "
-					+ "posición no válida");
+			System.out.println("No se pudo crear la celula, " + "posición no válida");
 		}
 	}
 
 	/**
+	 * Genera el codigo de ayuda referente a CrearCelulaCompleja.
 	 * 
-	 * @return Devuelve el codigo de ayuda referente a crear celula compleja.
+	 * @return Texto de ayuda correspondiente al comando.
 	 */
 	public String textoAyuda() {
-		return ("CREARCELULACOMPLEJA f c: Crea una nueva celula compleja en la posicion "
-				+ "(f,c) si es posible");
+		return ("CREARCELULACOMPLEJA f c: Crea una nueva celula compleja en la posicion " + "(f,c) si es posible");
 	}
+
 	/**
-	 * @return el comando CrearCelulaCompleja si el array de strings se corresponde
-	 * con este, null en otro caso
+	 * Parsea un array de String para construir el comando que representa.
+	 * 
+	 * @param cadenaComando
+	 *            Array de String a parsear.
+	 * @return Comando CrearCelulaCompleja si el array de strings se corresponde
+	 *         con este, null en otro caso.
 	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 3)
@@ -62,7 +69,7 @@ public class CrearCelulaCompleja extends Comando {
 			try {
 				f = Integer.parseInt(cadenaComando[1]);
 				c = Integer.parseInt(cadenaComando[2]);
-			} catch (NumberFormatException e) { //Gestion de errores
+			} catch (NumberFormatException e) { // Gestion de errores
 				return null;
 			}
 			return new CrearCelulaCompleja(f, c);

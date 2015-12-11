@@ -5,13 +5,14 @@ package tp.pr2.logica;
  * celulas. La super cie la vamos a representar mediante una matriz de celulas,
  * cuyo tamaño queda determinado por su numero de filas y columnas.
  * 
- * @version 1.0, 07/11/2015
+ * @version 2.0, 11/12/2015
  * @author Raul Murillo Montero
  * @author Antonio Valdivia de la Torre
  */
 
 public class Superficie {
 	private Celula[][] superficie; // Matriz de células.
+
 	private int filas; // Filas de la matriz superficie.
 	private int columnas; // Columnas de la matriz superficie.
 
@@ -23,7 +24,7 @@ public class Superficie {
 	 *            El numero de filas de la matriz. Debe ser mayor que 0.
 	 * @param nc
 	 *            El numero de columnas de la matriz. Debe ser mayor que 0.
-	 * @param numCels
+	 * @param numSimples
 	 *            El numero de celulas simples con las que se iniciara.
 	 * @param numComplejas
 	 *            El numero de celulas complejas con las que se iniciara.
@@ -79,14 +80,14 @@ public class Superficie {
 	 * Dada una casilla, crea una celula en dicha posicion.
 	 * 
 	 * @param casilla
-	 *            destino.
+	 *            casilla destino.
 	 * @return true si se ha creado la celula. false si no ha sido posible.
 	 */
 
 	/**
 	 * Indica las filas de la superficie.
 	 * 
-	 * @return numero de filas de la superficie
+	 * @return numero de filas de la superficie.
 	 */
 	public int getFilas() {
 		return filas;
@@ -95,7 +96,7 @@ public class Superficie {
 	/**
 	 * Indica las columnas de la superficie.
 	 * 
-	 * @return numero de columnas de la superficie
+	 * @return numero de columnas de la superficie.
 	 */
 	public int getColumnas() {
 		return columnas;
@@ -105,8 +106,8 @@ public class Superficie {
 	 * Dada una casilla, crea una celula simple en dicha posicion.
 	 * 
 	 * @param casilla
-	 *            destino
-	 * @return true si se ha creado, falso si no.
+	 *            casilla destino.
+	 * @return true si se ha creado, false si no.
 	 */
 	public boolean crearCelulaSimple(Casilla casilla) {
 		if (superficie[casilla.getX()][casilla.getY()] == null) {
@@ -120,8 +121,8 @@ public class Superficie {
 	 * Dada una casilla, crea una celula compleja en dicha posicion.
 	 * 
 	 * @param casilla
-	 *            destino
-	 * @return true si se ha creado, falso si no.
+	 *            casilla destino.
+	 * @return true si se ha creado, false si no.
 	 */
 	public boolean crearCelulaCompleja(Casilla casilla) {
 		if (superficie[casilla.getX()][casilla.getY()] == null) {
@@ -135,8 +136,8 @@ public class Superficie {
 	 * Elimina una celula de una casilla.
 	 * 
 	 * @param casilla
-	 *            origen
-	 * @return true si eliminada
+	 *            casilla origen.
+	 * @return true si eliminada.
 	 */
 	public boolean eliminarCelula(Casilla casilla) {
 		if (superficie[casilla.getX()][casilla.getY()] != null) {
@@ -169,86 +170,10 @@ public class Superficie {
 	 * @return casilla a la que se ha movido (o null) en caso de no moverse.
 	 */
 	public Casilla ejecutaMovimiento(int f, int c) {
-		if (superficie[f][c] != null && !superficie[f][c].getMovido()) {
+		if (superficie[f][c] != null) {
 			return superficie[f][c].ejecutaMovimiento(f, c, this);
 		} else
 			return null;
-	}
-
-	/**
-	 * Dada una casilla, ejecuta un paso sobre la celula simple que hay en ella,
-	 * si aun no se ha movido en ese turno (mover, reproducirse...).
-	 * 
-	 * @param origen
-	 *            casilla que evalua
-	 */
-	public Casilla evolucionarCelulaSimple(Casilla origen) {
-		// Si no está vacía y no se ha movido aún.
-		Casilla destino = null;
-		Casilla[] libres = new Casilla[8]; // Revisar por tema dimension
-		int cont = 0;
-		int i = origen.getX() - 1;
-		int j = origen.getY() - 1;
-		int p;
-		if (i < 0)
-			i = 0;
-		if (j < 0)
-			j = 0;
-		// Genera el array de casillas libres posibles.
-		while (i < filas && i <= origen.getX() + 1) {
-			p = j;
-			while (p < columnas && p <= origen.getY() + 1) {
-				if (superficie[i][p] == null) {
-					libres[cont] = new Casilla(i, p);
-					cont++;
-				}
-				p++;
-			}
-			i++;
-		}
-		if (cont != 0) {
-			int aleatorio = (int) (Math.random() * cont);
-			destino = new Casilla(libres[aleatorio].getX(),
-					libres[aleatorio].getY());
-		}
-		return destino;
-	}
-
-	/**
-	 * Dada una casilla, ejecuta un paso sobre la celula compleja que hay en
-	 * ella, si aun no se ha movido en ese turno (mover, reproducirse...).
-	 * 
-	 * @param origen
-	 *            casilla que evalua
-	 */
-	public Casilla evolucionarCelulaCompleja(Casilla origen) {
-		int aleatorio = (int) (Math.random() * filas * columnas - 1);
-		if (aleatorio >= origen.getX() * columnas + origen.getY())
-			aleatorio++; /*
-						 * En caso de que la casilla aleatoria este por delante
-						 * o sea la casilla donde se encuentra la celula a
-						 * mover, se suma uno, para corregir la posicion.
-						 */
-		Casilla destino = new Casilla(aleatorio / columnas, aleatorio
-				% columnas);
-		if (superficie[destino.getX()][destino.getY()] != null
-				&& !superficie[destino.getX()][destino.getY()].esComestible)
-			// En la casilla destino hay una celula compleja
-			destino = null;
-		return destino;
-	}
-
-	/**
-	 * Pone a todas las celulas de las superficie su indicador de movimiento a
-	 * false.
-	 */
-	public void setSuperficieFalse() {
-		for (int i = 0; i < filas; i++) {
-			for (int j = 0; j < columnas; j++) {
-				if (superficie[i][j] != null)
-					superficie[i][j].setMovidoFalse();
-			}
-		}
 	}
 
 	/**
@@ -274,7 +199,7 @@ public class Superficie {
 	 * Indica si una casilla contiene una celula comestible.
 	 * 
 	 * @param casilla
-	 *            a evaluar.
+	 *            casilla a evaluar.
 	 * @return true si la celula de la casilla es comestible.
 	 */
 	public boolean esComestible(Casilla casilla) {
@@ -285,16 +210,23 @@ public class Superficie {
 	 * Mueve la celula de una casilla a otra.
 	 * 
 	 * @param origen
+	 *            casilla origen.
 	 * @param destino
+	 *            casilla destino.
 	 */
 	public void moverA(Casilla origen, Casilla destino) {
-		superficie[destino.getX()][destino.getY()] = superficie[origen.getX()][origen
-				.getY()];
-		superficie[destino.getX()][destino.getY()].setMovidoTrue();
+		superficie[destino.getX()][destino.getY()] = superficie[origen.getX()][origen.getY()];
 		eliminarCelula(origen);
 	}
 
-	public boolean vacia(Casilla cas) {
-		return (superficie[cas.getX()][cas.getY()] == null);
+	/**
+	 * Indica si una determinada casilla de la sueprficie esta o no vacia.
+	 * 
+	 * @param casilla
+	 *            casilla a evaluar.
+	 * @return true si la casilla esta vacia.
+	 */
+	public boolean vacia(Casilla casilla) {
+		return (superficie[casilla.getX()][casilla.getY()] == null);
 	}
 }

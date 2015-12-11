@@ -16,10 +16,12 @@ public class EliminarCelula extends Comando {
 	private int c;
 
 	/**
-	 * Constructor de la clase
+	 * Constructor de la clase.
 	 * 
 	 * @param fila
+	 *            Coordenada X.
 	 * @param columna
+	 *            Coordenada Y.
 	 */
 	public EliminarCelula(int fila, int columna) {
 		f = fila;
@@ -28,29 +30,33 @@ public class EliminarCelula extends Comando {
 
 	/**
 	 * Elimina la celula de la casilla (f,c) si es posible, si no muestra un
-	 * mensaje de error
+	 * mensaje de error.
 	 * 
 	 * @param mundo
+	 *            Mundo sobre el que se ejecuta el comando.
 	 */
 	public void ejecuta(Mundo mundo) {
 		if (!mundo.eliminarCelula(f, c)) {
-			System.out.println("No se pudo eliminar la celula, "
-					+ "posicion no valida");
+			System.out.println("No se pudo eliminar la celula, " + "posicion no valida");
 		}
 	}
 
 	/**
+	 * Genera el codigo de ayuda referente a EliminarCelula.
 	 * 
-	 * @return Devuelve el codigo de ayuda referente a Eliminar celula.
+	 * @return Texto de ayuda correspondiente al comando.
 	 */
 	public String textoAyuda() {
-		return ("ELIMINARCELULA f c: Elimina la celula de la casilla (f, c)"
-				+ " si es posible");
+		return ("ELIMINARCELULA f c: Elimina la celula de la casilla (f, c)" + " si es posible");
 	}
 
 	/**
-	 * @return el comando EliminarCelula si el array de strings se corresponde
-	 *         con este, null en otro caso
+	 * Parsea un array de String para construir el comando que representa.
+	 * 
+	 * @param cadenaComando
+	 *            Array de String a parsear.
+	 * @return Comando EliminarCelula si el array de strings se corresponde con
+	 *         este, null en otro caso.
 	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 3)

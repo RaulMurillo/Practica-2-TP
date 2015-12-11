@@ -3,33 +3,36 @@ package tp.pr2.control;
 import tp.pr2.logica.*;
 
 /**
- * Clase abstracta de la que heredan todos los comandos de la practica
- * @version 2.0, 04/12/2015
+ * Clase abstracta de la que heredan todos los comandos de la practica.
+ * 
+ * @version 2.0, 11/12/2015
  * @author Raul Murillo Montero
  * @author Antonio Valdivia de la Torre
  */
 public abstract class Comando {
 	/**
-	 * ejecuta el comando correspondiente sobre el mundo
+	 * Ejecuta el comando correspondiente sobre el mundo.
 	 * 
 	 * @param mundo
+	 *            Mundo sobre el que se ejecuta el comando.
 	 */
 	public abstract void ejecuta(Mundo mundo);
 
 	/**
-	 * recibe un array de String , que debe procesar devolviendo el comando que
+	 * Recibe un array de String, que debe procesar devolviendo el comando que
 	 * representa el string.
 	 * 
 	 * @param cadenaComando
-	 * @return
+	 *            Array de Strings con los comandos a parsear.
+	 * @return Comando correspondiente.
 	 */
 	public abstract Comando parsea(String[] cadenaComando);
 
 	/**
-	 * devuelve un String con la información de ayuda que se quiera mostrar sobre
+	 * Genera un String con la informacion de ayuda que se quiera mostrar sobre
 	 * el comando.
 	 * 
-	 * @return
+	 * @return String con la informacion de ayuda.
 	 */
 	public abstract String textoAyuda();
 }

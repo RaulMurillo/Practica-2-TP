@@ -21,7 +21,7 @@ public class Controlador {
 	 * Inicializa los atributos.
 	 * 
 	 * @param mundo
-	 *            sobre el que se ejecutaran los comandos.
+	 *            Mundo sobre el que se ejecutaran los comandos.
 	 * @param in
 	 *            Scanner para realizar las operaciones de lectura.
 	 */
@@ -31,8 +31,7 @@ public class Controlador {
 	}
 
 	/**
-	 * Consiste en bucle en el que se pide un comando al usuario y se ejecuta
-	 * dicho comando.
+	 * Bucle en el que se pide un comando al usuario y se ejecuta dicho comando.
 	 */
 	public void realizarSimulacion() {
 		String cadena;
@@ -46,7 +45,7 @@ public class Controlador {
 			 * mayuscula-minuscula-511492/)
 			 */
 			cadena = cadena.toUpperCase();
-			String [] array = cadena.split("\\s+");
+			String[] array = cadena.split("\\s+");
 			Comando comando = ParserComandos.parseaComando(array);
 			if (comando != null) {
 				comando.ejecuta(mundo);

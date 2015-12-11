@@ -13,25 +13,31 @@ public class Iniciar extends Comando {
 	public final String INICIAR = "INICIAR";
 
 	/**
-	 * Reinicia el mundo
+	 * Reinicia el mundo.
 	 * 
 	 * @param mundo
+	 *            Mundo sobre el que se ejecuta el comando.
 	 */
 	public void ejecuta(Mundo mundo) {
 		mundo.iniciarMundo();
 	}
 
 	/**
+	 * Genera el codigo de ayuda referente a Iniciar.
 	 * 
-	 * @return Devuelve el codigo de ayuda referente a iniciar.
+	 * @return Texto de ayuda correspondiente al comando.
 	 */
 	public String textoAyuda() {
 		return ("INICIAR: Inicia una nueva simulación");
 	}
 
 	/**
-	 * @return el comando Iniciar si el array de strings se corresponde con
-	 *         este, null en otro caso
+	 * Parsea un array de String para construir el comando que representa.
+	 * 
+	 * @param cadenaComando
+	 *            Array de String a parsear.
+	 * @return Comando Iniciar si el array de strings se corresponde con este,
+	 *         null en otro caso.
 	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 1)

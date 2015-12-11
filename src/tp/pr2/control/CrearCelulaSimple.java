@@ -19,7 +19,9 @@ public class CrearCelulaSimple extends Comando {
 	 * Constructor de la clase
 	 * 
 	 * @param fila
+	 *            Coordenada X.
 	 * @param columna
+	 *            Coordenada Y.
 	 */
 	public CrearCelulaSimple(int fila, int columna) {
 		f = fila;
@@ -31,26 +33,30 @@ public class CrearCelulaSimple extends Comando {
 	 * error.
 	 * 
 	 * @param mundo
+	 *            Mundo sobre el que se ejecuta el comando.
 	 */
 	public void ejecuta(Mundo mundo) {
 		if (!mundo.crearCelulaSimple(f, c)) {
-			System.out.println("No se pudo crear la celula, "
-					+ "posición no válida");
+			System.out.println("No se pudo crear la celula, " + "posición no válida");
 		}
 	}
 
 	/**
+	 * Genera el codigo de ayuda referente a CrearCelulaSimple.
 	 * 
-	 * @return Devuelve el codigo de ayuda referente a crear celula simple.
+	 * @return Texto de ayuda correspondiente al comando.
 	 */
 	public String textoAyuda() {
-		return ("CREARCELULASIMPLE f c: Crea una nueva celula simple en la posicion "
-				+ "(f,c) si es posible");
+		return ("CREARCELULASIMPLE f c: Crea una nueva celula simple en la posicion " + "(f,c) si es posible");
 	}
 
 	/**
-	 * @return el comando CrearCelulaSimple si el array de strings se
-	 *         corresponde con este, null en otro caso
+	 * Parsea un array de String para construir el comando que representa.
+	 * 
+	 * @param cadenaComando
+	 *            Array de String a parsear.
+	 * @return Comando CrearCelulaSimple si el array de strings se corresponde
+	 *         con este, null en otro caso.
 	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 3)

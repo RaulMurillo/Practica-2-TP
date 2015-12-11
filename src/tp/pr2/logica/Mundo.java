@@ -5,7 +5,7 @@ package tp.pr2.logica;
  * dimension de la superficie y las celulas iniciales y un atributo que indica
  * si se ha terminado o no la simulacion.
  * 
- * @version 2.1, 09/12/2015
+ * @version 2.2, 11/12/2015
  * @author Raul Murillo Montero
  * @author Antonio Valdivia de la Torre
  */
@@ -28,18 +28,15 @@ public class Mundo {
 	 * aleatorias de esta.
 	 */
 	public Mundo() {
-		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES,
-				NUMCOMPLEJAS);
+		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES, NUMCOMPLEJAS);
 		this.simulacionTerminada = false;
 	}
-	
+
 	/**
-	 * Reinicia un mundo de forma aleatoria
+	 * Reinicia un mundo.
 	 */
 	public void iniciarMundo() {
-		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES,
-				NUMCOMPLEJAS);
-		// this.simulacionTerminada = false;
+		this.superficie = new Superficie(FILAS, COLUMNAS, NUMSIMPLES, NUMCOMPLEJAS);
 	}
 
 	/**
@@ -47,14 +44,13 @@ public class Mundo {
 	 * superficie.
 	 * 
 	 * @param f
-	 *            coordenada fila
+	 *            coordenada fila.
 	 * @param c
-	 *            coordenada columna
+	 *            coordenada columna.
 	 * @return true si se ha creado la celula.
 	 */
 	public boolean crearCelulaSimple(int f, int c) {
-		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie
-				.getColumnas()))
+		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie.getColumnas()))
 			return false;
 		else {
 			Casilla cas = new Casilla(f, c);
@@ -67,14 +63,13 @@ public class Mundo {
 	 * superficie.
 	 * 
 	 * @param f
-	 *            coordenada fila
+	 *            coordenada fila.
 	 * @param c
-	 *            coordenada columna
+	 *            coordenada columna.
 	 * @return true si se ha creado la celula.
 	 */
 	public boolean crearCelulaCompleja(int f, int c) {
-		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie
-				.getColumnas()))
+		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie.getColumnas()))
 			return false;
 		else {
 			Casilla cas = new Casilla(f, c);
@@ -87,14 +82,13 @@ public class Mundo {
 	 * superficie.
 	 * 
 	 * @param f
-	 *            coordenada fila
+	 *            coordenada fila.
 	 * @param c
-	 *            coordenada columna
+	 *            coordenada columna.
 	 * @return true si se ha eliminado la celula.
 	 */
 	public boolean eliminarCelula(int f, int c) {
-		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie
-				.getColumnas()))
+		if (!(f >= 0 && f < superficie.getFilas() && c >= 0 && c < superficie.getColumnas()))
 			return false;
 		else {
 			Casilla cas = new Casilla(f, c);
@@ -114,10 +108,17 @@ public class Mundo {
 	 * descritas.
 	 */
 	public void evoluciona() {
-		superficie.setSuperficieFalse();
+		Casilla casilla;
+		boolean[][] movido = new boolean[superficie.getFilas()][superficie.getColumnas()];
 		for (int i = 0; i < superficie.getFilas(); i++) {
 			for (int j = 0; j < superficie.getColumnas(); j++) {
-				superficie.ejecutaMovimiento(i, j);
+				if (movido[i][j] == false) {
+					casilla = superficie.ejecutaMovimiento(i, j);
+					if (casilla != null) {
+						movido[casilla.getX()][casilla.getY()] = true;
+					}
+				}
+
 			}
 		}
 	}
@@ -138,6 +139,9 @@ public class Mundo {
 		return this.simulacionTerminada;
 	}
 
+	/**
+	 * Cambia el valor del booleano de simulación a true.
+	 */
 	public void setSimulacionTerminadaTrue() {
 		this.simulacionTerminada = true;
 	}

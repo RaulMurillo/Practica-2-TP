@@ -13,25 +13,31 @@ public class Paso extends Comando {
 	public final String PASO = "PASO";
 
 	/**
-	 * Ejecuta un paso sobre el mundo
+	 * Ejecuta un paso sobre el mundo.
 	 * 
 	 * @param mundo
+	 *            Mundo sobre el que se ejecuta el comando.
 	 */
 	public void ejecuta(Mundo mundo) {
 		mundo.evoluciona();
 	}
 
 	/**
+	 * Genera el codigo de ayuda referente a Paso.
 	 * 
-	 * @return Devuelve el codigo de ayuda referente a un paso.
+	 * @return Texto de ayuda correspondiente al comando.
 	 */
 	public String textoAyuda() {
 		return ("PASO: Realiza un paso en la simulacion");
 	}
 
 	/**
-	 * @return el comando Paso si el array de strings se corresponde con este,
-	 *         null en otro caso
+	 * Parsea un array de String para construir el comando que representa.
+	 * 
+	 * @param cadenaComando
+	 *            Array de String a parsear.
+	 * @return Comando Paso si el array de strings se corresponde con este, null
+	 *         en otro caso.
 	 */
 	public Comando parsea(String[] cadenaComando) {
 		if (cadenaComando.length != 1)
