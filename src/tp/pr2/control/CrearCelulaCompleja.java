@@ -29,7 +29,7 @@ public class CrearCelulaCompleja extends Comando {
 	}
 
 	/**
-	 * Crea una celula compleja en la posición (f, c) si es posible, si no
+	 * Crea una celula compleja en la posicion (f, c) si es posible, si no
 	 * muestra error.
 	 * 
 	 * @param mundo
